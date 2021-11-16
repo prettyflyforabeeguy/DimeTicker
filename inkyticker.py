@@ -1,14 +1,21 @@
 #!/usr/bin/env python3
 
 # A simple template for using the Red/Black/White InkyPhat resoultion 212x104
+# Logo images should be 50px x 50px RGB mode
 
 from PIL import Image, ImageFont, ImageDraw
 import inkyphat
 import time, datetime
 import requests
+import config as _cfg
 
 class InkyPi():
     def __init__(self):
+        self.config_dict = _cfg.Config().config_dict
+        self.cmcKey = _cfg.Config().config_vsearch(self.config_dict, "CoinMarketCapKey")
+        self.coinList = self.config_dict["Coins"]
+        self.currencyList = self.config_dict["Currency"]
+
         # setup fonts
         self.fsAmaticSCBold = 12
         self.fontAmaticSCBold = ImageFont.truetype(inkyphat.fonts.AmaticSCBold, self.fsAmaticSCBold)
@@ -39,7 +46,7 @@ class InkyPi():
         url = base_url + "symbol=" + symbol + "&convert=" + currency
         # Set headers
         headers = {
-            "X-CMC_PRO_API_KEY" : "",
+            "X-CMC_PRO_API_KEY" : self.cmcKey,
             "Accept" : "application/json"
         }
         # Request body
@@ -55,8 +62,9 @@ class InkyPi():
         price = f'{price:.10f}'
         return price
 
-
     def setLogo(self, path, ticker, pair):
+        inkyphat.rectangle([(0, 0), (212, 104)], fill=inkyphat.WHITE, outline=None)  # Clear Screen
+        inkyphat.rectangle([(54, 1), (55, 104)], fill=inkyphat.BLACK, outline=None)  # Vertical Line
         logo = Image.open(path)
         coin =  ticker + "\n -\n " + pair
         inkyphat.text((2, 3), coin, inkyphat.BLACK, font=self.fontPressStart2P)
@@ -66,32 +74,23 @@ class InkyPi():
         inkyphat.rectangle([(57, 23), (210, 104)], fill=inkyphat.RED, outline=None)  # Clear the price zone
         inkyphat.text((59, 50), price, inkyphat.WHITE, font=self.fontPressStart2P_large)
 
-    def getTextSize(self, h, font, txt):
-        # Calculate the positioning and draw the text
-        txt_w, txt_h = font.getsize(txt)
-        txt_x = int((self.inky_display.width - txt_w) / 2)
-        txt_y = h + self.padding
-        #txt_y = int(y_top + ((y_bottom - y_top - name_h) / 2))  #Place text within white text bar
-        #self.draw.text((txt_x, txt_y), txt, self.inky_display.BLACK, font=font)
-        return txt_x, txt_y, txt_h
-
 
 if __name__ == '__main__':
     iph = InkyPi()
-
-    #iph.setLogo("./img/dimecoin_logo_black.png","DIME", "USD")
-    iph.setLogo("./img/BTC_logo.png","BTC", "USD")
+    c_len = len(iph.coinList)
 
     while True:
-        inkyphat.rectangle([(57, 1), (210, 23)], fill=inkyphat.WHITE, outline=None) # Clear the title bar
-        title = str(datetime.datetime.now())
-        inkyphat.text((60, 3), title, inkyphat.BLACK, font=iph.fontFredokaOne)
+        #for each coin in coinlist, set logo and text, run the API, display everything, then sleep
+        for i in range(c_len):
+            iph.setLogo("./img/" + iph.coinList[i] + ".png",iph.coinList[i], iph.currencyList[0])
+            inkyphat.rectangle([(57, 1), (210, 23)], fill=inkyphat.WHITE, outline=None) # Clear the title bar
+            title = str(datetime.datetime.now())
+            inkyphat.text((60, 3), title, inkyphat.BLACK, font=iph.fontFredokaOne)
 
-       #price = iph.getPrice("DIME", "USD")
-        price = iph.getPrice("BTC", "USD")
+            price = iph.getPrice(iph.coinList[i], iph.currencyList[0])
 
-        print(price)
-        iph.displayPrice(str(price))
-        inkyphat.show()
+            print(price)
+            iph.displayPrice(str(price))
+            inkyphat.show()
+            time.sleep(30)
         time.sleep(600)
-

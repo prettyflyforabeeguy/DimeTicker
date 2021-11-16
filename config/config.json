@@ -1,1 +1,5 @@
-#
+{
+ "CoinMarketCapKey": "",
+ "Coins": ["DIME", "BTC", "ETH"],
+ "Currency": ["USD"]
+}
