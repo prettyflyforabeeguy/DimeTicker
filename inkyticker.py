@@ -37,7 +37,7 @@ class InkyPi():
         inkyphat.set_colour('red')
         # draw rectangle zones for the display
         inkyphat.rectangle([(0, 0), (212, 104)], fill=inkyphat.WHITE, outline=None)  # Clear Screen
-        inkyphat.rectangle([(57, 23), (210, 104)], fill=inkyphat.RED, outline=None)  # Price Zone
+        inkyphat.rectangle([(57, 23), (210, 104)], fill=inkyphat.WHITE, outline=None)  # Price Zone
         inkyphat.rectangle([(57, 1), (210, 23)], fill=inkyphat.WHITE, outline=None)  # Title Bar
         inkyphat.rectangle([(54, 1), (55, 104)], fill=inkyphat.BLACK, outline=None)  # Vertical Line
 
@@ -58,9 +58,17 @@ class InkyPi():
             print(e)
 
         price = float(self._response.json()["data"][symbol]["quote"][currency]["price"])
-        #price = round(price, 2)
-        price = f'{price:.10f}'
-        return price
+        hr_change = float(self._response.json()["data"][symbol]["quote"][currency]["percent_change_1h"])
+        hr_change = f'{hr_change:.2f}'
+        if price > 1:
+            #price = round(price, 2)
+            price = f"{price:,.2f}"
+
+        else:
+            price = f'{price:.10f}'
+            #price = "{:,.10f}".format(price)
+
+        return price, hr_change
 
     def setLogo(self, path, ticker, pair):
         inkyphat.rectangle([(0, 0), (212, 104)], fill=inkyphat.WHITE, outline=None)  # Clear Screen
@@ -70,9 +78,17 @@ class InkyPi():
         inkyphat.text((2, 3), coin, inkyphat.BLACK, font=self.fontPressStart2P)
         inkyphat.paste(logo,(2, 50))
 
-    def displayPrice(self, price):
-        inkyphat.rectangle([(57, 23), (210, 104)], fill=inkyphat.RED, outline=None)  # Clear the price zone
-        inkyphat.text((59, 50), price, inkyphat.WHITE, font=self.fontPressStart2P_large)
+    def displayPrice(self, price, hr_change):
+        inkyphat.rectangle([(57, 23), (210, 104)], fill=inkyphat.WHITE, outline=None)  # Clear the price zone
+        inkyphat.text((59, 45), price, inkyphat.BLACK, font=self.fontPressStart2P_large)
+        if float(hr_change) < 0:
+            color = inkyphat.RED
+        else:
+            color = inkyphat.BLACK
+
+        hr_change = "Change in last hr: " + hr_change + "%"
+        inkyphat.text((71, 88), hr_change, color, font=self.fontFredokaOne)
+
 
 
 if __name__ == '__main__':
@@ -87,10 +103,11 @@ if __name__ == '__main__':
             title = str(datetime.datetime.now())
             inkyphat.text((60, 3), title, inkyphat.BLACK, font=iph.fontFredokaOne)
 
-            price = iph.getPrice(iph.coinList[i], iph.currencyList[0])
+            price, hr_change = iph.getPrice(iph.coinList[i], iph.currencyList[0])
 
-            print(price)
-            iph.displayPrice(str(price))
+            print(f"{iph.coinList[i]} price: {price} {iph.currencyList[0]}")
+            print(f"Percent Change in the last hour: {hr_change}%")
+            iph.displayPrice(str(price), str(hr_change))
             inkyphat.show()
-            time.sleep(30)
+            time.sleep(5)
         time.sleep(600)
