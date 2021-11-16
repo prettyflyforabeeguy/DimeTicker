@@ -6,7 +6,7 @@ Inky pHat can be found here:</br>
 https://shop.pimoroni.com/products/inky-phat?variant=12549254217811 </br>
 https://www.adafruit.com/product/3743
 
-This little app currently supports Dimecoin, Bitcoin, and Ethereum.</br>
+This little app currently supports <a href="https://www.dimecoinnetwork.com">Dimecoin</a>, Bitcoin, and Ethereum.</br>
 The coin prices are updated every 10 minutes.
 
 1. Attach the Inky device to your Raspberry Pi and make sure SPI is enabled: sudo raspi-config
