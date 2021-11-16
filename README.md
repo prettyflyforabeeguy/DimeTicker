@@ -1,5 +1,5 @@
 # A Crypto Ticker for the inkyphat 212x104 
-InkyPhat can be found here:
+InkyPhat can be found here:</br>
 https://shop.pimoroni.com/products/inky-phat?variant=12549254217811 </br>
 https://www.adafruit.com/product/3743
 
