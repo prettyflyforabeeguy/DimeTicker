@@ -36,10 +36,10 @@ class InkyPi():
 
         inkyphat.set_colour('red')
         # draw rectangle zones for the display
-        inkyphat.rectangle([(0, 0), (212, 104)], fill=inkyphat.WHITE, outline=None)  # Clear Screen
-        inkyphat.rectangle([(57, 23), (210, 104)], fill=inkyphat.WHITE, outline=None)  # Price Zone
-        inkyphat.rectangle([(57, 1), (210, 23)], fill=inkyphat.WHITE, outline=None)  # Title Bar
-        inkyphat.rectangle([(54, 1), (55, 104)], fill=inkyphat.BLACK, outline=None)  # Vertical Line
+        inkyphat.rectangle([(0, 0), (212, 104)], fill=inkyphat.WHITE, outline=None)   # Clear Screen
+        inkyphat.rectangle([(57, 23), (210, 104)], fill=inkyphat.WHITE, outline=None) # Price Zone
+        inkyphat.rectangle([(57, 1), (210, 23)], fill=inkyphat.WHITE, outline=None)   # Title Bar
+        inkyphat.rectangle([(54, 1), (55, 104)], fill=inkyphat.BLACK, outline=None)   # Vertical Line
 
     def getPrice(self, symbol, currency):
         base_url = "https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?"
@@ -81,12 +81,18 @@ class InkyPi():
     def displayPrice(self, price, hr_change):
         inkyphat.rectangle([(57, 23), (210, 104)], fill=inkyphat.WHITE, outline=None)  # Clear the price zone
         inkyphat.text((59, 45), price, inkyphat.BLACK, font=self.fontPressStart2P_large)
+
         if float(hr_change) < 0:
             color = inkyphat.RED
+            down = Image.open('./img/down_arrow.png')
+            inkyphat.paste(down,(160, 62))
         else:
             color = inkyphat.BLACK
+            up = Image.open('./img/up_arrow.png')
+            inkyphat.paste(up,(160, 20))
 
-        hr_change = "Change in last hr: " + hr_change + "%"
+
+        hr_change = "Change in last hr: " + str(hr_change) + "%"
         inkyphat.text((71, 88), hr_change, color, font=self.fontFredokaOne)
 
 

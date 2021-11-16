@@ -1,5 +1,5 @@
 {
  "CoinMarketCapKey": "",
- "Coins": ["DIME", "BTC", "ETH"],
+ "Coins": ["DIME", "BTC", "ETH", "ADA", "DOGE"],
  "Currency": ["USD"]
 }
