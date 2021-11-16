@@ -2,7 +2,7 @@
 https://shop.pimoroni.com/products/inky-phat?variant=12549254217811
 https://www.adafruit.com/product/3743
 
-This app currently supports Dimecoin, Bitcoin, and Ethereum.<br>
+This app currently supports Dimecoin, Bitcoin, and Ethereum.</br>
 The coin prices are updated every 10 minutes.
 
 1. Attach the Inky device to your Raspberry Pi
