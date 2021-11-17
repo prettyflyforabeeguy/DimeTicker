@@ -1,5 +1,7 @@
 {
  "CoinMarketCapKey": "",
  "Coins": ["DIME", "BTC", "ETH", "ADA", "DOGE"],
- "Currency": ["USD"]
+ "Currency": ["USD"],
+ "RotateScreen": false,
+ "QueryInterval": 1800
 }

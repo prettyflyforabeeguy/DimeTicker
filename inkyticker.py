@@ -15,6 +15,8 @@ class InkyPi():
         self.cmcKey = _cfg.Config().config_vsearch(self.config_dict, "CoinMarketCapKey")
         self.coinList = self.config_dict["Coins"]
         self.currencyList = self.config_dict["Currency"]
+        self.rotateScreen = self.config_dict["RotateScreen"]
+        self.qInterval = self.config_dict["QueryInterval"]
 
         # setup fonts
         self.fsAmaticSCBold = 12
@@ -33,8 +35,10 @@ class InkyPi():
 
     def phatSetup(self):
         inkyphat.set_border(inkyphat.BLACK)
-
         inkyphat.set_colour('red')
+        if self.rotateScreen == True:
+            inkyphat.set_rotation(180)
+
         # draw rectangle zones for the display
         inkyphat.rectangle([(0, 0), (212, 104)], fill=inkyphat.WHITE, outline=None)   # Clear Screen
         inkyphat.rectangle([(57, 23), (210, 104)], fill=inkyphat.WHITE, outline=None) # Price Zone
@@ -96,7 +100,6 @@ class InkyPi():
         inkyphat.text((71, 88), hr_change, color, font=self.fontFredokaOne)
 
 
-
 if __name__ == '__main__':
     iph = InkyPi()
     c_len = len(iph.coinList)
@@ -116,4 +119,4 @@ if __name__ == '__main__':
             iph.displayPrice(str(price), str(hr_change))
             inkyphat.show()
             time.sleep(5)
-        time.sleep(600)
+        time.sleep(iph.qInterval)
