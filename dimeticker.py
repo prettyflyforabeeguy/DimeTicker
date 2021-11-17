@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
-# A simple template for using the Red/Black/White InkyPhat resoultion 212x104
+# A simple crypto ticker app using the Red/Black/White InkyPhat resoultion 212x104
+# created by prettyflyforabeeguy https://github.com/prettyflyforabeeguy/DimeTicker
 # Logo images should be 50px x 50px RGB mode
 
 from PIL import Image, ImageFont, ImageDraw
@@ -9,7 +10,7 @@ import time, datetime
 import requests
 import config as _cfg
 
-class InkyPi():
+class DimeTicker():
     def __init__(self):
         self.config_dict = _cfg.Config().config_dict
         self.cmcKey = _cfg.Config().config_vsearch(self.config_dict, "CoinMarketCapKey")
@@ -101,22 +102,22 @@ class InkyPi():
 
 
 if __name__ == '__main__':
-    iph = InkyPi()
-    c_len = len(iph.coinList)
+    dt = DimeTicker()
+    c_len = len(dt.coinList)
 
     while True:
         #for each coin in coinlist, set logo and text, run the API, display everything, then sleep
         for i in range(c_len):
-            iph.setLogo("./img/" + iph.coinList[i] + ".png",iph.coinList[i], iph.currencyList[0])
+            dt.setLogo("./img/" + dt.coinList[i] + ".png",dt.coinList[i], dt.currencyList[0])
             inkyphat.rectangle([(57, 1), (210, 23)], fill=inkyphat.WHITE, outline=None) # Clear the title bar
             title = str(datetime.datetime.now())
-            inkyphat.text((60, 3), title, inkyphat.BLACK, font=iph.fontFredokaOne)
+            inkyphat.text((60, 3), title, inkyphat.BLACK, font=dt.fontFredokaOne)
 
-            price, hr_change = iph.getPrice(iph.coinList[i], iph.currencyList[0])
+            price, hr_change = dt.getPrice(dt.coinList[i], dt.currencyList[0])
 
-            print(f"{iph.coinList[i]} price: {price} {iph.currencyList[0]}")
+            print(f"{dt.coinList[i]} price: {price} {dt.currencyList[0]}")
             print(f"Percent Change in the last hour: {hr_change}%")
-            iph.displayPrice(str(price), str(hr_change))
+            dt.displayPrice(str(price), str(hr_change))
             inkyphat.show()
             time.sleep(5)
-        time.sleep(iph.qInterval)
+        time.sleep(dt.qInterval)
