@@ -26,3 +26,10 @@ Just change the "USD" in the config.json to your desired currency i.e. GBP.  If 
 Enjoy!
 
 Many thanks to <a href="https://www.thingiverse.com/3mul0r/designs">3mul0r</a> for his awesome raspberry pi zero inky case design.
+
+
+If you found this useful, donations are always welcome:
+DIME: 7JwbNZdP3pzreem3v3rmWAXcP5LxvqRTgU 
+BTC:  bc1q3m4x0d8j6c8enkzeet2c4tcy26uflsm9s4njg4
+LTC:  ltc1qzhavlsq29kqe65cjjuq2l23d92f0mqlwkwldrg
+ETH:  0xaf9dB0Eaf3A398A4F549A09e1230B42B51FdAFF3
