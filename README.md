@@ -24,3 +24,5 @@ Create a 50 pixel x 50 pixel image of your coin and place this .png file in the 
 Just change the "USD" in the config.json to your desired currency i.e. GBP.  If it's a supported currency with coinmarketcap it should work.
 
 Enjoy!
+
+Many thanks to <a href="https://www.thingiverse.com/3mul0r/designs">3mul0r</a> for his awesome raspberry pi zero inky case design.
