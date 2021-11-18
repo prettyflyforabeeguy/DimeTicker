@@ -1,6 +1,6 @@
 # A Crypto Ticker for the inkyphat 212x104 
 
-![dimeinky](https://user-images.githubusercontent.com/75382474/142042179-8a3e642e-ee83-4a61-b024-6bd6d966e56f.jpg)
+![DimeTicker](https://user-images.githubusercontent.com/75382474/142347905-30446d59-735b-47f7-80fb-7ace743d8434.jpg)
 
 Inky pHat can be found here:</br>
 https://shop.pimoroni.com/products/inky-phat?variant=12549254217811 </br>
