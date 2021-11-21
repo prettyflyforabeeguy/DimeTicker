@@ -6,7 +6,7 @@
 
 from PIL import Image, ImageFont, ImageDraw
 import inkyphat
-import time, datetime
+import time, datetime, sys
 import requests
 import config as _cfg
 
@@ -81,6 +81,8 @@ class DimeTicker():
         logo = Image.open(path)
         coin =  ticker + "\n -\n " + pair
         inkyphat.text((2, 3), coin, inkyphat.BLACK, font=self.fontPressStart2P)
+        blank = Image.open("./img/blank.png")
+        inkyphat.paste(blank,(2, 50))  # Attempt to clear some background pixels with a blank image.
         inkyphat.paste(logo,(2, 50))
 
     def displayPrice(self, price, hr_change):
@@ -101,23 +103,66 @@ class DimeTicker():
         inkyphat.text((71, 88), hr_change, color, font=self.fontFredokaOne)
 
 
+    def splashScreen(self, path):
+        inkyphat.rectangle([(0, 0), (212, 104)], fill=inkyphat.WHITE, outline=None)  # Clear Screen
+        qr = Image.open(path)
+        inkyphat.paste(qr, (5, 10))
+        inkyphat.text((100, 2), "DIMEcoin", inkyphat.BLACK, font=self.fontPressStart2P)
+        inkyphat.text((88, 15), "The Global Payment", inkyphat.BLACK, font=self.fontFredokaOne)
+        inkyphat.text((88, 28), "Solution!", inkyphat.BLACK, font=self.fontFredokaOne)
+
+        inkyphat.text((88, 51), "Learn more at:", inkyphat.BLACK, font=self.fontFredokaOne)
+        inkyphat.text((88, 64), "dimecoinnetwork.com", inkyphat.BLACK, font=self.fontFredokaOne)
+        inkyphat.text((60, 90), "Starting up DimeTicker...", inkyphat.RED, font=self.fontFredokaOne)
+
+        inkyphat.show()
+
+    def donations(self, path):
+        inkyphat.rectangle([(0, 0), (212, 104)], fill=inkyphat.WHITE, outline=None)  # Clear Screen
+        donations = Image.open(path)
+        inkyphat.paste(donations, (1, 1))
+        inkyphat.text((5, 64), "DIME", inkyphat.BLACK, font=self.fontPressStart2P)
+        inkyphat.text((93, 64), "BTC", inkyphat.BLACK, font=self.fontPressStart2P)
+        inkyphat.text((169, 64), "ETH", inkyphat.BLACK, font=self.fontPressStart2P)
+        inkyphat.text((5, 77), "Donations welcome!", inkyphat.BLACK, font=self.fontFredokaOne)
+        inkyphat.text((5, 90), "Thank you for using DimeTicker!", inkyphat.RED, font=self.fontFredokaOne)
+
+        inkyphat.show()
+
 if __name__ == '__main__':
     dt = DimeTicker()
     c_len = len(dt.coinList)
 
-    while True:
-        #for each coin in coinlist, set logo and text, run the API, display everything, then sleep
-        for i in range(c_len):
-            dt.setLogo("./img/" + dt.coinList[i] + ".png",dt.coinList[i], dt.currencyList[0])
-            inkyphat.rectangle([(57, 1), (210, 23)], fill=inkyphat.WHITE, outline=None) # Clear the title bar
-            title = str(datetime.datetime.now())
-            inkyphat.text((60, 3), title, inkyphat.BLACK, font=dt.fontFredokaOne)
+    dt.splashScreen("./img/dimeNetworkqr_small.png")
+    time.sleep(5)
+    try:
+        while True:
+            #for each coin in coinlist, set logo and text, run the API, display everything, then sleep
 
-            price, hr_change = dt.getPrice(dt.coinList[i], dt.currencyList[0])
+            #dt.setQR("./img/DIMEdonationqr.png")
+            for i in range(c_len):
+                dt.setLogo("./img/" + dt.coinList[i] + ".png",dt.coinList[i], dt.currencyList[0])
+                inkyphat.rectangle([(57, 1), (210, 23)], fill=inkyphat.WHITE, outline=None) # Clear the title bar
+                title = str(datetime.datetime.now())
+                inkyphat.text((60, 3), title, inkyphat.BLACK, font=dt.fontFredokaOne)
 
-            print(f"{dt.coinList[i]} price: {price} {dt.currencyList[0]}")
-            print(f"Percent Change in the last hour: {hr_change}%")
-            dt.displayPrice(str(price), str(hr_change))
-            inkyphat.show()
-            time.sleep(5)
-        time.sleep(dt.qInterval)
+                price, hr_change = dt.getPrice(dt.coinList[i], dt.currencyList[0])
+
+                print(f"{dt.coinList[i]} price: {price} {dt.currencyList[0]}")
+                print(f"Percent Change in the last hour: {hr_change}%")
+                dt.displayPrice(str(price), str(hr_change))
+                inkyphat.show()
+                time.sleep(120)
+            time.sleep(dt.qInterval)
+    except KeyboardInterrupt:
+        # Exit
+        donate = """Want to see more cool stuff like this? Your dontations are always welcome!
+DIME: 7JwbNZdP3pzreem3v3rmWAXcP5LxvqRTgU
+BTC: bc1q3m4x0d8j6c8enkzeet2c4tcy26uflsm9s4njg4
+LTC: ltc1qzhavlsq29kqe65cjjuq2l23d92f0mqlwkwldrg
+ETH: 0xaf9dB0Eaf3A398A4F549A09e1230B42B51FdAFF3"""
+        print(donate)
+        print("Thank you for using DimeTicker. Goodbye!")
+        dt.donations("./img/donations.png")
+        sys.exit()
+

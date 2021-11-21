@@ -3,5 +3,5 @@
  "Coins": ["DIME", "BTC", "ETH", "ADA", "DOGE"],
  "Currency": ["USD"],
  "RotateScreen": false,
- "QueryInterval": 1800
+ "QueryInterval": 1200
 }
