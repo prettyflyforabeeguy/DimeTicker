@@ -10,11 +10,11 @@ This little app currently supports <a href="https://www.dimecoinnetwork.com">Dim
 The coin prices are updated on a configurable time within config.json.  The default is every 30 minutes.  Please note that the free API access with CoinMarketCap is limited to about 300 requests per day.  So if you're querying 5 different coins every 1800 seconds (30 minutes) that's 240 API calls per day.  
 
 1. Attach the Inky device to your Raspberry Pi and make sure SPI is enabled: sudo raspi-config
-2. Download the Code: git clone https://github.com/prettyflyforabeeguy/InkyTicker.git
+2. Download the Code: git clone https://github.com/prettyflyforabeeguy/DimeTicker.git
 3. Install the inky phat library: pip3 install inkyphat
 4. Generate your own API key for coinmarketcap: https://coinmarketcap.com/api/
 5. Add your API key to ./config/config.json and save your changes
-6. Run the program: python3 inkyticker.py
+6. Run the program: python3 dimeticker.py
 
 Pro Tips: 
 1. Want to add more coins?
@@ -26,3 +26,10 @@ Just change the "USD" in the config.json to your desired currency i.e. GBP.  If 
 Enjoy!
 
 Many thanks to <a href="https://www.thingiverse.com/3mul0r/designs">3mul0r</a> for his awesome raspberry pi zero inky case design.
+
+
+If you found this useful, donations are always welcome:</br>
+DIME: 7JwbNZdP3pzreem3v3rmWAXcP5LxvqRTgU  </br>
+BTC:  bc1q3m4x0d8j6c8enkzeet2c4tcy26uflsm9s4njg4 </br>
+LTC:  ltc1qzhavlsq29kqe65cjjuq2l23d92f0mqlwkwldrg </br>
+ETH:  0xaf9dB0Eaf3A398A4F549A09e1230B42B51FdAFF3 </br>
