@@ -2,12 +2,12 @@
 
 ![DimeTicker](https://user-images.githubusercontent.com/75382474/142347905-30446d59-735b-47f7-80fb-7ace743d8434.jpg)
 
+This little crypto app currently supports <a href="https://www.dimecoinnetwork.com">Dimecoin</a>, Bitcoin, Ethereum, Cardano, and Doge.</br>
+The coin prices are updated on a configurable time within config.json.  The default is every 30 minutes.  Please note that the free API access with CoinMarketCap is limited to about 300 requests per day.  So if you're querying 5 different coins every 1800 seconds (30 minutes) that's 240 API calls per day.  
+
 Inky pHat can be found here:</br>
 https://shop.pimoroni.com/products/inky-phat?variant=12549254217811 </br>
 https://www.adafruit.com/product/3743
-
-This little app currently supports <a href="https://www.dimecoinnetwork.com">Dimecoin</a>, Bitcoin, Ethereum, Cardano, and Doge.</br>
-The coin prices are updated on a configurable time within config.json.  The default is every 30 minutes.  Please note that the free API access with CoinMarketCap is limited to about 300 requests per day.  So if you're querying 5 different coins every 1800 seconds (30 minutes) that's 240 API calls per day.  
 
 <b>IMPORTANT:</b> </br>
 Pimoroni makes 2 models of the Inky pHat. While they look identical on the outside, they come in 2 different resolutions and use totally different libraries. </br>
