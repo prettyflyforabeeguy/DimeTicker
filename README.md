@@ -9,11 +9,11 @@ https://www.adafruit.com/product/3743
 This little app currently supports <a href="https://www.dimecoinnetwork.com">Dimecoin</a>, Bitcoin, Ethereum, Cardano, and Doge.</br>
 The coin prices are updated on a configurable time within config.json.  The default is every 30 minutes.  Please note that the free API access with CoinMarketCap is limited to about 300 requests per day.  So if you're querying 5 different coins every 1800 seconds (30 minutes) that's 240 API calls per day.  
 
-<b>IMPORTANT:</b>
+<b>IMPORTANT:</b> </br>
 Pimoroni makes 2 models of the Inky pHat that while they look identical on the outside, they come in 2 different
-resolutions.
-212x104 Hight-Temp
-250x122 SSD1608 (newer)
+resolutions. </br>
+212x104 Hight-Temp </br>
+250x122 SSD1608 (newer) </br>
 
 The libraries required for each model are differnet and not backwards compatible. 
 
