@@ -21,7 +21,7 @@ Pimoroni makes 2 models of the Inky pHat. While they look identical on the outsi
       For 250x122: curl https://get.pimoroni.com/inky | bash </br>
 3. Download the Code: git clone https://github.com/prettyflyforabeeguy/DimeTicker.git
 4. Generate your own API key for coinmarketcap: https://coinmarketcap.com/api/
-5. Add your API key to ./config/config.json and save your changes
+5. Add your API key between the quotes in ./config/config.json and save your changes
 6. Run the program:</br> 
       For 212x104: python3 ticker.py </br>
       For 250x122: python3 ticker2.py </br>
@@ -29,7 +29,7 @@ Pimoroni makes 2 models of the Inky pHat. While they look identical on the outsi
 <b>Pro Tips: </b> </br> 
 1. Want to add more coins?
 Create a 50 pixel x 50 pixel image of your coin and place this .png file in the img folder.  Be sure to name the file exactly the same as the coin ticker.  The image mode should be RGB 8/bit and the only supports Red, Black, and White colors.  Then in your config.json just add the new coin ticker to the list.
-Not confortable with this? No prob, just copy the blank.png to what ever coin you want.
+Not comfortable with this? No prob, just copy the img\blank.png to what ever coin you want.
 i.e. cp blank.png LTC.png
 Now when you add LTC to your config.json it will have a blank logo but will still retrieve the price and everything.
 
