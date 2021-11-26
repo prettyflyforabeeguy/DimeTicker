@@ -36,7 +36,7 @@ Now when you add LTC to your config.json it will have a blank logo but will stil
 2. Want to change the currency?
 Just change the "USD" in the config.json to your desired currency i.e. GBP.  If it's a supported currency with coinmarketcap it should work.
 
-Final Notes:
+<b>Final Notes:</b> </br>
 Currently screen rotation is not supported in the 250x122 ticker2.py code but is supported in the 212x104 ticker.py code.
 
 Enjoy!
