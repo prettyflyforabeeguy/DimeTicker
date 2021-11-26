@@ -10,13 +10,11 @@ This little app currently supports <a href="https://www.dimecoinnetwork.com">Dim
 The coin prices are updated on a configurable time within config.json.  The default is every 30 minutes.  Please note that the free API access with CoinMarketCap is limited to about 300 requests per day.  So if you're querying 5 different coins every 1800 seconds (30 minutes) that's 240 API calls per day.  
 
 <b>IMPORTANT:</b> </br>
-Pimoroni makes 2 models of the Inky pHat that while they look identical on the outside, they come in 2 different
-resolutions. </br>
+Pimoroni makes 2 models of the Inky pHat. While they look identical on the outside, they come in 2 different resolutions and use totally different libraries. </br>
 212x104 Hight-Temp </br>
 250x122 SSD1608 (newer) </br>
 
-The libraries required for each model are differnet and not backwards compatible. 
-
+<b>SETUP: </b> </br>
 1. Attach the Inky device to your Raspberry Pi and make sure SPI is enabled: sudo raspi-config
 2. Install the inky library:</br> 
       For 212x104: Install the inky phat library: pip3 install inkyphat </br>
@@ -28,7 +26,7 @@ The libraries required for each model are differnet and not backwards compatible
       For 212x104: python3 ticker.py </br>
       For 250x122: python3 ticker2.py </br>
 
-Pro Tips: 
+<b>Pro Tips: </b> </br> 
 1. Want to add more coins?
 Create a 50 pixel x 50 pixel image of your coin and place this .png file in the img folder.  Be sure to name the file exactly the same as the coin ticker.  The image mode should be RGB 8/bit and the only supports Red, Black, and White colors.  Then in your config.json just add the new coin ticker to the list.
 Not confortable with this? No prob, just copy the blank.png to what ever coin you want.
