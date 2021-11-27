@@ -182,6 +182,6 @@ LTC: ltc1qzhavlsq29kqe65cjjuq2l23d92f0mqlwkwldrg
 ETH: 0xaf9dB0Eaf3A398A4F549A09e1230B42B51FdAFF3"""
         print(donate)
         print("Thank you for using DimeTicker. Goodbye!")
-        #dt.donations("./img/donations.png")
+        dt.donations("./img/donations.png")
         sys.exit()
 
