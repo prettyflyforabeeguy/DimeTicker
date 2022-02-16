@@ -21,10 +21,22 @@ Pimoroni makes 2 models of the Inky pHat. While they look identical on the outsi
       For 250x122: curl https://get.pimoroni.com/inky | bash </br>
 3. Download the Code: git clone https://github.com/prettyflyforabeeguy/DimeTicker.git
 4. Generate your own API key for coinmarketcap: https://coinmarketcap.com/api/
-5. Add your API key between the quotes in ./config/config.json and save your changes
+5. Add your API key between the quotes in ./config/config.json and save your changes.  (See example below)
 6. Run the program:</br> 
       For 212x104: python3 ticker.py </br>
       For 250x122: python3 ticker2.py </br>
+
+<b> config.json example </b><br>
+```
+{
+ "CoinMarketCapKey": "<your cmc key here>",
+ "Coins": ["DIME", "BTC", "ETH", "ADA", "DOGE"],
+ "Currency": ["USD"],
+ "RotateScreen": false,
+ "QueryInterval": 1200
+}
+```
+<br>
 
 <b>Pro Tips: </b> </br> 
 1. Want to add more coins?
