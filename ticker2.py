@@ -63,6 +63,17 @@ class DimeTicker():
         }
         try:
             self._response = requests.get(url, headers=headers, data=requestBody)  #Execute the API and store the response.
+        except Timeout as t:
+            print(f"CMC is taking too long to lookup {symbol}.  Skipping...")
+            pass
+        except KeyError as k:
+            print(f"CMC is having issues looking up {symbol}.  Skipping...")
+            print(k)
+            pass
+        except ConnectionError as con:
+            print(f"CMC is having issues looking up {symbol}.  Skipping...")
+            print(con)
+            pass
         except Exception as e:
             print(e)
 

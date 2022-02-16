@@ -59,8 +59,22 @@ class DimeTicker():
         }
         try:
             self._response = requests.get(url, headers=headers, data=requestBody)  #Execute the API and store the response.
+        except Timeout as t:
+            print(f"CMC is taking too long to lookup {symbol}.  Skipping...")
+            pass
+        except KeyError as k:
+            print(f"CMC is having issues looking up {symbol}.  Skipping...")
+            print(k)
+            pass
+        except ConnectionError as con:
+            print(f"CMC is having issues looking up {symbol}.  Skipping...")
+            print(con)
+            pass
         except Exception as e:
             print(e)
+            inkyphat.rectangle([(0, 0), (212, 104)], fill=inkyphat.WHITE, outline=None)  # Clear Screen
+            inkyphat.text((5, 64), "Something is wrong with coinmarketcaps API", inkyphat.BLACK, font=self.fontPressStart2P)
+            inkyphat.text((5, 77), "Reboot your raspberry pi!", inkyphat.BLACK, font=self.fontFredokaOne)
 
         price = float(self._response.json()["data"][symbol]["quote"][currency]["price"])
         hr_change = float(self._response.json()["data"][symbol]["quote"][currency]["percent_change_1h"])
