@@ -1,7 +1,0 @@
-{
- "CoinMarketCapKey": "cec5b037-d4cb-418f-8b2d-55d887f4acb5",
- "Coins": ["DIME", "BTC", "ETH", "ADA", "DOGE"],
- "Currency": ["USD"],
- "RotateScreen": false,
- "QueryInterval": 1200
-}
