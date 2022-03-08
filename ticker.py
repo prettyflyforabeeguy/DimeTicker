@@ -59,35 +59,27 @@ class DimeTicker():
         }
         try:
             self._response = requests.get(url, headers=headers, data=requestBody)  #Execute the API and store the response.
-        except Timeout as t:
-            print(f"CMC is taking too long to lookup {symbol}.  Skipping...")
-            pass
-        except KeyError as k:
-            print(f"CMC is having issues looking up {symbol}.  Skipping...")
-            print(k)
-            pass
-        except ConnectionError as con:
-            print(f"CMC is having issues looking up {symbol}.  Skipping...")
-            print(con)
-            pass
+            price = float(self._response.json()["data"][symbol]["quote"][currency]["price"])
+            hr_change = float(self._response.json()["data"][symbol]["quote"][currency]["percent_change_1h"])
+            hr_change = f'{hr_change:.2f}'
+            if price > 1:
+                #price = round(price, 2)
+                price = f"{price:,.2f}"
+
+            else:
+                price = f'{price:.10f}'
+                #price = "{:,.10f}".format(price)
+
+            return price, hr_change
+
         except Exception as e:
             print(e)
-            inkyphat.rectangle([(0, 0), (212, 104)], fill=inkyphat.WHITE, outline=None)  # Clear Screen
-            inkyphat.text((5, 64), "Something is wrong with coinmarketcaps API", inkyphat.BLACK, font=self.fontPressStart2P)
-            inkyphat.text((5, 77), "Reboot your raspberry pi!", inkyphat.BLACK, font=self.fontFredokaOne)
-
-        price = float(self._response.json()["data"][symbol]["quote"][currency]["price"])
-        hr_change = float(self._response.json()["data"][symbol]["quote"][currency]["percent_change_1h"])
-        hr_change = f'{hr_change:.2f}'
-        if price > 1:
-            #price = round(price, 2)
-            price = f"{price:,.2f}"
-
-        else:
-            price = f'{price:.10f}'
-            #price = "{:,.10f}".format(price)
-
-        return price, hr_change
+            #inkyphat.rectangle([(0, 0), (212, 104)], fill=inkyphat.WHITE, outline=None)  # Clear Screen
+            #inkyphat.text((5, 64), "Something is wrong with coinmarketcaps API", inkyphat.BLACK, font=self.fontPressStart2P)
+            #inkyphat.text((5, 77), "Reboot your raspberry pi!", inkyphat.BLACK, font=self.fontFredokaOne)
+            print(f"EXCEPTION OCCURED\n {e}")
+            print(f"\nCMC is taking too long to lookup {symbol}.  Skipping...")
+            pass
 
     def setLogo(self, path, ticker, pair):
         inkyphat.rectangle([(0, 0), (212, 104)], fill=inkyphat.WHITE, outline=None)  # Clear Screen
@@ -159,8 +151,12 @@ if __name__ == '__main__':
                 inkyphat.rectangle([(57, 1), (210, 23)], fill=inkyphat.WHITE, outline=None) # Clear the title bar
                 title = str(datetime.datetime.now())
                 inkyphat.text((60, 3), title, inkyphat.BLACK, font=dt.fontFredokaOne)
-
-                price, hr_change = dt.getPrice(dt.coinList[i], dt.currencyList[0])
+                try:
+                    price, hr_change = dt.getPrice(dt.coinList[i], dt.currencyList[0])
+                except: 
+                    price = 0
+                    hr_change = 0
+                    pass
 
                 print(f"{dt.coinList[i]} price: {price} {dt.currencyList[0]}")
                 print(f"Percent Change in the last hour: {hr_change}%")
